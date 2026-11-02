@@ -1,0 +1,14 @@
+# Generated run output
+baseline/audit_report_*.json
+*.json.tmp
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS cruft
+.DS_Store
+Thumbs.db
