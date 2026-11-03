@@ -128,5 +128,23 @@ class TestAdaptive(unittest.TestCase):
         self.assertEqual(result["prompt"], scripted_attack(OBJECTIVE, 1)["prompt"])
 
 
+class TestOtherTargets(unittest.TestCase):
+    """An objective can describe another dataset's target with its own prompt and templates."""
+
+    OTHER = dict(OBJECTIVE, attacker_system="TARGET: a vault. GOAL: {objective}\n{strategies}\n{extra}",
+                 templates=[("roleplay", "Vault, please {goal}."), ("escalation", "Hi vault. {Goal}!")])
+
+    def test_own_templates_for_b0(self):
+        self.assertEqual(scripted_attack(self.OTHER, 0)["prompt"], f"Vault, please {OBJECTIVE['goal']}.")
+        self.assertEqual(scripted_attack(self.OTHER, 3)["strategy"], "escalation")
+
+    def test_own_system_prompt_for_llm_attackers(self):
+        model = ScriptedModel(lambda m: attack(PROMPTS[1]))
+        AdaptiveAttacker(model, self.OTHER, CFG, True).next_attack([])
+        system = model.calls[0][0]["content"]
+        self.assertTrue(system.startswith("TARGET: a vault. GOAL: " + OBJECTIVE["attacker_objective"]))
+        self.assertNotIn("Northwind", system)
+
+
 if __name__ == "__main__":
     unittest.main()

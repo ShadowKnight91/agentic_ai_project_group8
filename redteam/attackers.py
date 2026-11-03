@@ -137,8 +137,12 @@ def normalize_strategy(value):
 
 
 def scripted_attack(objective, index):
-    """Template `index` (mod 10) filled with the objective's goal."""
-    strategy, template = TEMPLATES[index % len(TEMPLATES)]
+    """Template `index` (mod 10) filled with the objective's goal.
+
+    An objective may bring its own templates (another dataset's target); the default is TEMPLATES.
+    """
+    templates = objective.get("templates") or TEMPLATES
+    strategy, template = templates[index % len(templates)]
     goal = objective["goal"]
     prompt = template.format(goal=goal, Goal=goal[0].upper() + goal[1:],
                              goal_b64=base64.b64encode(goal.encode()).decode())
@@ -147,6 +151,14 @@ def scripted_attack(objective, index):
 
 def _strategy_list():
     return "\n".join(f"- {k}: {v}" for k, v in STRATEGIES.items())
+
+
+def attacker_system(objective, extra):
+    """The attacker's system prompt. An objective may describe a different target
+    (`attacker_system`); the default is the Northwind store bot."""
+    template = objective.get("attacker_system") or ATTACKER_SYSTEM
+    return template.format(objective=objective["attacker_objective"], strategies=_strategy_list(),
+                           extra=extra)
 
 
 def _validate_attack(obj):
@@ -211,9 +223,7 @@ class SingleCallAttacker:
                 attacks.append(a)
 
     def _make_plan(self):
-        system = ATTACKER_SYSTEM.format(objective=self.objective["attacker_objective"],
-                                        strategies=_strategy_list(),
-                                        extra=SINGLE_CALL_EXTRA.format(budget=self.budget))
+        system = attacker_system(self.objective, SINGLE_CALL_EXTRA.format(budget=self.budget))
         messages = [{"role": "system", "content": system},
                     {"role": "user", "content": f"Write the {self.budget} messages now. JSON only."}]
         max_tokens = 300 * self.budget + 500
@@ -257,8 +267,7 @@ class AdaptiveAttacker:
         self.threshold = cfg["repeat_threshold"]
         self.max_retries = cfg["repeat_retries"]
         self.reply_chars = cfg["history_reply_chars"]
-        self.system = ATTACKER_SYSTEM.format(objective=objective["attacker_objective"],
-                                             strategies=_strategy_list(), extra=ADAPTIVE_EXTRA)
+        self.system = attacker_system(objective, ADAPTIVE_EXTRA)
 
     def next_attack(self, history):
         messages = [{"role": "system", "content": self.system},

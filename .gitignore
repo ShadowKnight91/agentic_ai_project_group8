@@ -12,3 +12,6 @@ venv/
 # OS cruft
 .DS_Store
 Thumbs.db
+
+# Tensor Trust benchmark files (downloaded with `python run.py tt-download`; not redistributed)
+data/tensor_trust/*.jsonl
