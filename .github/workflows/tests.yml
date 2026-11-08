@@ -1,0 +1,26 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.9", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Offline tests (fake models, no Ollama needed)
+        run: python -m unittest discover -s tests -v
+      - name: Summarize the example results
+        run: python analyze.py results/mac_demo/grid
+      - name: Original rule-based baseline
+        working-directory: baseline
+        run: python orchestrator.py

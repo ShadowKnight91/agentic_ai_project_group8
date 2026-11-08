@@ -1,0 +1,5 @@
+{
+  "_comment": "Quick pipeline test: 3 attempts per round, 1 hardening round.",
+  "budget": 3,
+  "hardening": {"max_rounds": 1, "max_revisions": 0}
+}

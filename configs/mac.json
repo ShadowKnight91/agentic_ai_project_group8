@@ -1,0 +1,8 @@
+{
+  "_comment": "16 GB Apple Silicon: one model for all agents so Ollama never swaps models. For final results use the defaults (judge = llama3.1:8b) on the RTX 4080.",
+  "agents": {
+    "attacker": {"model": "qwen2.5:7b", "num_ctx": 8192},
+    "defender": {"model": "qwen2.5:7b", "num_ctx": 8192},
+    "judge":    {"model": "qwen2.5:7b", "num_ctx": 8192}
+  }
+}

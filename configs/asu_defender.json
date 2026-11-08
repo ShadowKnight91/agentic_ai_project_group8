@@ -1,0 +1,6 @@
+{
+  "_comment": "Defender on ASU's Qwen model via CreateAI's OpenAI-compatible API. 1) set ASU_API_KEY to your CreateAI token; 2) run `python run.py list-models --backend asu` and put the Qwen model id below.",
+  "agents": {
+    "defender": {"backend": "asu", "model": "REPLACE_WITH_QWEN_MODEL_ID"}
+  }
+}
