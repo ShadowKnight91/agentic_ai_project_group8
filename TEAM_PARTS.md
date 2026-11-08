@@ -12,7 +12,7 @@ repository works and all of its tests pass.
 | 1. Attacker agent | Vishnu Honnavalli | nothing | `redteam/attackers.py`, `tests/test_attackers.py`, plus `redteam/__init__.py`, `.gitignore` and this file |
 | 2. Defender, scenario and checks | Hemanth Reddy Gundepally | nothing (stands alone, like part 1) | `redteam/scenario.py`, `redteam/checks.py`, `redteam/defender.py`, `redteam/tensor_trust.py`, `tests/test_defender.py` |
 | 3. Judge and model client | Krithika Hegde | part 2 | `redteam/llm.py`, `redteam/judge.py`, `tests/test_judge.py` |
-| 4. Evaluation and reporting | _TBD_ | part 2 | `redteam/metrics.py`, `redteam/report.py`, `redteam/analysis.py`, `analyze.py`, `label.py`, `tests/test_evaluation.py`, `results/mac_demo/` |
+| 4. Evaluation and reporting | Ananth Sundararajan Sekar | part 2 | `redteam/metrics.py`, `redteam/report.py`, `redteam/analysis.py`, `analyze.py`, `label.py`, `tests/test_evaluation.py`, `results/mac_demo/` |
 | 5. Orchestrator, hardening loop and CLI | _TBD_ | parts 1 to 4 | `redteam/config.py`, `redteam/orchestrator.py`, `run.py`, `configs/`, `data/tensor_trust/selected.json`, `tests/fakes.py`, `tests/test_orchestrator.py`, `README.md`, `.github/workflows/tests.yml` |
 
 **Not a teammate's part:** `baseline/` and the screenshots `AI 1.png`, `AI 2.png` and `AI 3.png` are the
