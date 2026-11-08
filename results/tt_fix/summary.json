@@ -1,0 +1,47 @@
+{
+  "attack_runs": 40,
+  "hardening_runs": 0,
+  "excluded_runs": 0,
+  "asr": {
+    "b2/TT": {
+      "k": 11,
+      "n": 20
+    },
+    "full/TT": {
+      "k": 13,
+      "n": 20
+    }
+  },
+  "median_attempts": {
+    "b2/TT": 2,
+    "b2/all": 2,
+    "full/TT": 2,
+    "full/all": 2
+  },
+  "fisher": {
+    "full_vs_b2/TT": 0.7475272825662147
+  },
+  "judge_check_agreement": 0.9772727272727273,
+  "judge_check_agreement_shown": 0.985981308411215,
+  "verdicts": {
+    "BROKEN": 24,
+    "REFUSED": 184,
+    "PARTIAL": 6
+  },
+  "behavior": {
+    "b2": {
+      "attempts": 114,
+      "repeat_rate": 0.0,
+      "refusal_rate": 0.0,
+      "fallback_rate": 0.008771929824561403
+    },
+    "full": {
+      "attempts": 100,
+      "repeat_rate": 0.0,
+      "refusal_rate": 0.0,
+      "fallback_rate": 0.01
+    }
+  },
+  "json_valid_rate": 0.9957894736842106,
+  "error_runs": 0
+}

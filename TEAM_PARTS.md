@@ -19,6 +19,10 @@ repository works and all of its tests pass.
 original proposal's code by our stakeholder, Chaitanya Abhay Muzumdar. Add them in a separate commit
 that credits him.
 
+**Milestone 2 results:** `results/pilot` (Northwind), `results/tt` (Tensor Trust), `results/tt_fix_v1` and
+`results/tt_fix` (the two hijacking-objective fixes), `results/hardening_pilot` and `results/demo` hold
+the run reports behind the Milestone 2 report. Each folder has a `summary.md`, except `demo`.
+
 ## What each part does
 
 1. **Attacker agent.** The five strategy categories and B0's ten scripted templates; B1, which writes
